@@ -1,0 +1,54 @@
+gravity|What goes up must come down.
+photosynthesis|Powered by sunlight.
+black hole|Not even light escapes.
+atom|Smaller than you think.
+molecule|Stronger together.
+neutron|Neither positive nor negative.
+evolution|Survival favors adaptation.
+ecosystem|Everything is connected.
+galaxy|Billions of stars.
+volcano|Pressure finds a way.
+
+algorithm|Follow the steps.
+compiler|Turns ideas into machines.
+binary tree|Every branch splits.
+pointer|Points somewhere else.
+socket|A conversation endpoint.
+database|Memory that never sleeps.
+kernel|The heart of the system.
+recursion|Again, but smaller.
+machine learning|Patterns over rules.
+hash table|Fast if you know the key.
+
+inception|Dream deeper.
+interstellar|Love transcends dimensions.
+gladiator|Are you entertained?
+the matrix|What is real?
+oppenheimer|Now I am become death.
+avatar|The way of water.
+parasite|The smell matters.
+whiplash|Not quite my tempo.
+the godfather|An offer you know.
+joker|One bad day.
+
+eren yeager|Keep moving forward.
+levi ackerman|Give up on your dream and die.
+mikasa|See you later, Eren.
+thorfinn|I have no enemies.
+thors|A true warrior needs no sword.
+tanjiro kamado|The bond between siblings.
+nezuko kamado|A demon who protects humans.
+ryuk|Loves apples.
+light yagami|The world shall know justice.
+satoru gojo|Throughout heaven and earth.
+
+heisenberg|Say my name.
+game of thrones|When you play the game.
+friends|How you doin?
+dark|The end is the beginning.
+sherlock|The game is on.
+the office|That's what she said.
+stranger things|Friends don't lie.
+the boys|Never meet your heroes.
+house md|Everybody lies.
+mr robot|Control is an illusion.

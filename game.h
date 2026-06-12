@@ -1,11 +1,11 @@
-#define MAX_WORD_LENGTH 20
-#define MAX_HINT 2
+#define MAX_WORD_LENGTH 40
+#define MAX_HINT_LENGTH 160
 #define MAX_NAME 20
 #define MAX_PLAYERS 3
 
 typedef struct WordEntry {
   char word[MAX_WORD_LENGTH];
-  char hint[MAX_HINT];
+  char hint[MAX_HINT_LENGTH];
 } WordEntry;
 
 typedef struct Player {
@@ -26,9 +26,14 @@ typedef struct GameState {
   int game_over;
 } GameState;
 
-void initialize_game();
-int load_words();
-WordEntry select_random_word();
-int process_guess();
-int is_game_over();
-void next_player();
+int load_words(const char *, WordEntry *);
+
+WordEntry select_random_word(WordEntry *, int);
+
+void next_player(GameState *);
+
+void initialize_game(GameState *, WordEntry, struct Player *, int);
+
+int process_guess(GameState *, char);
+
+int is_game_over(const GameState *);

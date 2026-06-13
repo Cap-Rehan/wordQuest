@@ -124,16 +124,12 @@ void build_state_msg(GameState *gs, char *buf, int buf_size) {
     }
 
     snprintf(buf, buf_size,
-        "\n--- Round %d ---\n"
-        "%s\n"
         "Word : %s\n"
         "\n"
         "Tried: %s\n"
         "Score: %s\n"
         "\n"
         "Turn : %s\n",
-        gs->round_number,
-        gs->current_word.hint,
         masked,
         gs->guessed_letters,
         scores,
@@ -148,8 +144,15 @@ int run_round(GameState *gs, int *clients, int count) {
     char state_buf[512];
     char recv_buf[32];
 
+    /* Send round header + hint once at the start */
+    char header[256];
+    snprintf(header, sizeof(header), "\n--- Round %d ---\n%s\n",
+             gs->round_number, gs->current_word.hint);
+    send_to_all(clients, count, header);
+
     while (!is_game_over(gs)) {
         /* Send current state to everyone */
+        send_to_all(clients, count, "\n------------------------------------------\n");
         build_state_msg(gs, state_buf, sizeof(state_buf));
         send_to_all(clients, count, state_buf);
 
@@ -223,8 +226,11 @@ int main() {
     for (int r = 0; r < NUM_ROUNDS; r++) {
         WordEntry word = select_random_word(words, word_count);
         initialize_game(&game, word, players, player_count);
-        game.round_number = r + 1;   /* initialize_game always sets this to 1 */
+        game.round_number = r + 1;
         if (run_round(&game, clients, player_count) < 0) break;
+        /* Sync scores back so next round starts with correct totals */
+        for (int i = 0; i < player_count; i++)
+            players[i].score = game.players[i].score;
     }
 
     /* Final scores */

@@ -1,10 +1,8 @@
-#include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
 #include <time.h>
-#include <unistd.h>
+#include "platform.h"
 #include "game.h"
 
 #define PORT      8080
@@ -127,10 +125,12 @@ void build_state_msg(GameState *gs, char *buf, int buf_size) {
 
     snprintf(buf, buf_size,
         "\n--- Round %d ---\n"
-        "Hint : %s\n"
+        "%s\n"
         "Word : %s\n"
+        "\n"
         "Tried: %s\n"
         "Score: %s\n"
+        "\n"
         "Turn : %s\n",
         gs->round_number,
         gs->current_word.hint,
@@ -203,8 +203,8 @@ int run_round(GameState *gs, int *clients, int count) {
 /* ── Main ───────────────────────────────────────────────────────────────── */
 
 int main() {
-    srand(time(NULL));   /* time.h is included via game.c, already seeded there
-                            but safe to seed again in main */
+    net_init();
+    srand(time(NULL));
 
     WordEntry words[MAX_WORDS];
     int word_count = load_words("words.txt", words);
@@ -223,6 +223,7 @@ int main() {
     for (int r = 0; r < NUM_ROUNDS; r++) {
         WordEntry word = select_random_word(words, word_count);
         initialize_game(&game, word, players, player_count);
+        game.round_number = r + 1;   /* initialize_game always sets this to 1 */
         if (run_round(&game, clients, player_count) < 0) break;
     }
 
@@ -235,7 +236,8 @@ int main() {
     }
     send_to_all(clients, player_count, final);
 
-    for (int i = 0; i < player_count; i++) close(clients[i]);
-    close(server_fd);
+    for (int i = 0; i < player_count; i++) close_socket(clients[i]);
+    close_socket(server_fd);
+    net_cleanup();
     return 0;
 }

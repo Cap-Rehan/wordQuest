@@ -1,9 +1,6 @@
-#include <arpa/inet.h>
-#include <netinet/in.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/socket.h>
-#include <unistd.h>
+#include "platform.h"
 
 #define PORT 8080
 #define BUF  1024
@@ -63,11 +60,13 @@ void game_loop(int fd) {
 }
 
 int main() {
+    net_init();
     int fd = connect_to_server("127.0.0.1", PORT);
-    if (fd < 0) return 1;
+    if (fd < 0) { net_cleanup(); return 1; }
 
     game_loop(fd);
 
-    close(fd);
+    close_socket(fd);
+    net_cleanup();
     return 0;
 }

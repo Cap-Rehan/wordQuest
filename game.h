@@ -1,7 +1,7 @@
 #define MAX_WORD_LENGTH 40
 #define MAX_HINT_LENGTH 160
 #define MAX_NAME 20
-#define MAX_PLAYERS 3
+#define MAX_PLAYERS 2
 
 typedef struct WordEntry {
   char word[MAX_WORD_LENGTH];

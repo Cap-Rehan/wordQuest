@@ -56,7 +56,7 @@ void initialize_game(GameState *gs, WordEntry theWord, struct Player *players,
 
 int process_guess(GameState *gs, char guess) {
   int found = 0;
-  for (int i = 0; i < sizeof gs->guessed_letters; i++) {
+  for (int i = 0; i < (int)sizeof gs->guessed_letters; i++) {
     if (gs->guessed_letters[i] == guess) {
       found = 1;
       break;
@@ -69,7 +69,7 @@ int process_guess(GameState *gs, char guess) {
   gs->guessed_letters[len] = guess;
   gs->guessed_letters[len + 1] = '\0';
 
-  for (int i = 0; i < strlen(gs->current_word.word); i++) {
+  for (int i = 0; i < (int)strlen(gs->current_word.word); i++) {
     if (gs->current_word.word[i] == guess)
       return 1;
   }
@@ -91,16 +91,4 @@ int is_game_over(const GameState *gs) {
   return 1;
 }
 
-int main() {
-  srand(time(NULL));
 
-  WordEntry words[100];
-  int word_count = load_words("words.txt", words);
-
-  WordEntry selected = select_random_word(words, word_count);
-
-  printf("Word: %s\n", selected.word);
-  printf("Hint: %s\n", selected.hint);
-
-  return 0;
-}

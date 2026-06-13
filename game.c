@@ -90,5 +90,3 @@ int is_game_over(const GameState *gs) {
   }
   return 1;
 }
-
-

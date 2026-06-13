@@ -9,7 +9,7 @@
 #define NUM_ROUNDS 2
 #define MAX_WORDS 100
 
-/* ── Send Helpers ───────────────────────────────────────────────────────── */
+// Send Helpers
 
 void send_to_one(int sock, const char *msg) { send(sock, msg, strlen(msg), 0); }
 
@@ -19,7 +19,7 @@ void send_to_all(int *clients, int count, const char *msg) {
   }
 }
 
-/* ── Server Setup ───────────────────────────────────────────────────────── */
+// Server Setup
 
 int setup_server(int port) {
   int fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -51,7 +51,7 @@ int setup_server(int port) {
   return fd;
 }
 
-/* ── Lobby ──────────────────────────────────────────────────────────────── */
+// Lobby
 
 void run_lobby(int server_fd, int *clients, Player *players, int *count) {
   char buf[256];
@@ -97,8 +97,7 @@ void run_lobby(int server_fd, int *clients, Player *players, int *count) {
   send_to_all(clients, *count, "All players connected. Game starting!\n");
 }
 
-/* ── Build Masked Word ─────────────────────────────────────────────────── */
-/* Turns "eren yeager" + guessed_letters into "_ r e n  y e a g e r"        */
+// Build Masked Word
 
 void build_masked_word(GameState *gs, char *out) {
   const char *word = gs->current_word.word;
@@ -111,15 +110,15 @@ void build_masked_word(GameState *gs, char *out) {
     } else {
       out[j++] = '_';
     }
-    out[j++] = ' '; /* space between each character for readability */
+    out[j++] = ' '; // space between each character for readability
   }
   if (j > 0)
-    j--; /* remove trailing space */
+    j--; // remove trailing space
   out[j] = '\0';
 }
 
-/* ── Build State Message ────────────────────────────────────────────────── */
-/* One string sent to all players at the start of each turn.                */
+// Build State Message
+// One string sent to all players at the start of each turn.
 
 void build_state_msg(GameState *gs, char *buf, int buf_size) {
   char masked[128];
@@ -145,8 +144,7 @@ void build_state_msg(GameState *gs, char *buf, int buf_size) {
            gs->players[gs->current_player_index].name);
 }
 
-/* ── Run Round ──────────────────────────────────────────────────────────── */
-/* Returns 0 on normal finish, -1 if a player disconnected.                 */
+// Run Round
 
 int run_round(GameState *gs, int *clients, int count) {
   char state_buf[512];
@@ -214,8 +212,6 @@ int run_round(GameState *gs, int *clients, int count) {
 
   return 0;
 }
-
-/* ── Main ───────────────────────────────────────────────────────────────── */
 
 int main() {
   net_init();

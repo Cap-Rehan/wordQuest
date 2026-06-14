@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mr-md": "2.1.2-beta"
+  },
+  "scripts": {
+    "build": "bun chapters/01-chapter/chapter.ts",
+    "dev": "md dev chapters/wordquest",
+    "g": "md g",
+    "generate": "md generate"
+  }
+}

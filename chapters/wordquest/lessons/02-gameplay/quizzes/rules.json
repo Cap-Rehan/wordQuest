@@ -1,0 +1,15 @@
+{
+  "questions": [
+    {
+      "q": "What happens if a player guesses a letter correctly?",
+      "options": [
+        "The game ends",
+        "They get +1 point and their turn passes",
+        "They get +1 point and keep their turn",
+        "They lose a point"
+      ],
+      "answer": 2,
+      "explanation": "Correct guesses reward the player with a point and let them guess again!"
+    }
+  ]
+}

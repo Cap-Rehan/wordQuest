@@ -1,0 +1,8 @@
+[
+	{
+		"prop": "strictMode",
+		"type": "checkbox",
+		"label": "Strict Mode (Lose points on wrong guesses)",
+		"value": false
+	}
+]

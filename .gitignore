@@ -1,0 +1,6 @@
+docs-mrmd
+
+client
+server
+node_modules
+chapters/**/out
